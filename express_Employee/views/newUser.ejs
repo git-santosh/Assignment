@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <% include layouts/main %>
+    <body>
+        <br>
+        <br>
+        <br>
+           
+            <div class="container"  ng-app="" >
+                 <div class="left" style="display:inline-block">
+                    <h1>New User</h1>
+                </div>
+                <div class="right" style="float:right"> 
+                    <a href="/users" class="btn btn-md btn-info" >Back</a>
+                </div>
+                <form action="/users/create" method="post" >
+                    <h2 class="form-signin-heading">Create an account</h2>
+                    <input type="text" class="form-control" placeholder="First Name" name="firstName" ></input><br><br>
+                    
+                    <input type="text" class="form-control" placeholder="last Name" name="lastName"  ></input><br><br>
+
+                    <input type="date" class="form-control" placeholder="Date of Birth"  name="dob" ></input><br><br>
+
+                    <input type="email" class="form-control" placeholder="E-Mail address" name="email" ></input><br><br>
+
+                    <input type="text" class="form-control" placeholder="Phone Number"  name="phone" ></input><br><br>
+
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="create"></input>
+                </form>
+
+            </div> 
+    </body>
+</html>
+
