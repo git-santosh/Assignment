@@ -1,0 +1,52 @@
+
+
+	<div class="table-responsive">
+		  <table class="table">
+		    <tr>
+		    <th>ID </th>
+		    <th>Name </th>
+		    <th>Description </th>
+		    <th>Calories </th>
+		    <th>Create Date </th>
+		    <th>Image</th>
+		    <th> </th>
+		    <th> </th>
+		    <th> </th>
+		    <th> </th>
+		    </tr>
+
+		    <% _.each(recipes,function(recipes){ %>
+		    	<tr data-id="<%= recipes.id %>" data-model="recipes">
+		    		<td> <%= recipes.id %> </td>
+		    		<td> <%= recipes.r_name %> </td>
+		    		<td> <%= recipes.description %> </td>
+		    		<td> <%= recipes.calories %> </td>
+		    		<td> <%= recipes.r_create_date %> </td>
+		    		<td> <img src="<%= recipes.r_image %>"> </td>
+		    		<td> <a class="btn btn-sm btn-primary" href="/Recipe/show/<%= recipes.id %>">Show</a></td>
+		    		<td><a class="btn btn-sm btn-warning" href="/Recipe/edit/<%= recipes.id %>">Edit</a> </td>
+		    		<td><a class="btn btn-sm btn-danger" href="/Recipe/destroy/<%= recipes.id %>">Delete</a> </td>
+		    	</tr>
+		    <% }) %>
+		  </table>
+	</div>
+<!--
+	<% _.each(recipes,function(recipes){ %>
+	<div class="recipestrip">
+
+	<div class="recipebg">
+				<div class="recipeimgbg"><img src="<%= recipes.r_image %>" width="154" height="100"></div>
+				<div style="margin:auto;">
+					<div class="recipename">
+					<%= recipes.r_name %><br>
+					<span class="recipenamegry"><%= recipes.r_create_date %> </span>
+					</div>
+					<div class="memberrecipe">
+					<%= recipes.calories %>
+					</div>
+				</div>
+			<div class="clear"></div>
+			</div>
+	</div>	
+ <% }) %> -->
+ <!--<a href="/Recipe/add">Add Employee</a>-->

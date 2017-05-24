@@ -1,0 +1,13 @@
+<div class="container"> 
+    <h2>Create Recipe </h2> 
+    <form action="/Recipe/update/<%= recipes.id %>" method="POST" enctype="multipart/form-data"  style="max-width:30%; padding:19px 29px 29px; background-color:#ececec; border:1px solid #9EC0EB;" >
+
+        <input type="text" placeholder="Recipe Name" name="r_name" style="margin-bottom:10px;" value="<%= recipes.r_name %>"><br>
+        <input type="text" placeholder="Recipe description" name="description" style="margin-bottom:10px;" value="<%= recipes.description %>"><br>
+        
+        <input type="text" placeholder="Recipe calories" name="calories" style="margin-bottom:10px;" value="<%= recipes.calories %>"><br>
+        <input type="date" placeholder="Recipe created date" name="r_create_date" style="margin-bottom:10px;" value="<%= recipes.r_create_date %>"><br>
+        <input type="file" name="r_image" id="r_image" style="margin-bottom:10px;"><br>
+        <input type="submit" value="update">
+    </form>   
+ </div>
