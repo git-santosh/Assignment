@@ -1,0 +1,26 @@
+<div class="container">
+<div class="table-responsive">
+		  <table class="table">
+		    <tr>
+		    <th>ID </th>
+		    <th>Name </th>
+		    <th>Address</th>
+		    <th>E-mail </th>
+		    <th>Mobile Phone </th>
+		    <th>Date of Birth</th>
+		   
+		    <th> </th>
+		    </tr>
+		    	<tr data-id="<%= user.id %>" data-model="user">
+		    		<td> <%= user.id %> </td>
+		    		<td> <%= user.name %> </td>
+		    		<td> <%= user.address %> </td>
+		    		<td> <%= user.email %> </td>
+					<td> <%= user.phone %> </td>
+					<td> <%= user.dob %> </td>
+					<!-- <td><img src="<%= user.userPhoto %>" ></td> -->
+		    	</tr>
+		  </table>
+	</div>
+<a class="btn btn-medium btn-primary" href="/Employee/edit/<%= user.id %>">Edit</a>
+</div>
