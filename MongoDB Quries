@@ -1,0 +1,35 @@
+//Find All recoreds 
+//find({where clause},{select clause})
+User.find({},{},function(error,speciality)
+	{
+		console.log(JSON.stringify(speciality));		
+		if (error)
+		{
+			deferred.resolve(error);
+		}
+		else
+		{
+			deferred.resolve({
+							   "response_status":"success",
+							    "speciality":speciality
+							});
+		}
+	});
+  
+  //Find All recoreds without id. You can remove the _id field from the results by setting its exclusion <field> to 0 in the projection, as in the following example:
+  
+ 	User.find({},{ name:1 , _id: 0},function(error,speciality)
+	{
+		console.log(JSON.stringify(speciality));		
+		if (error)
+		{
+			deferred.resolve(error);
+		}
+		else
+		{
+			deferred.resolve({
+							   "response_status":"success",
+							    "speciality":speciality
+							});
+		}
+	});
