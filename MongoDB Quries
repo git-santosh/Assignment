@@ -37,3 +37,6 @@ Users.find({},{},function(error,speciality)
 //Update Query [ db.getCollection('DbName').update('existing database field',$set:{ newly added field and value}}) ]
 
 db.getCollection('Users').update({name:'santosh'},{$set :{created_on : '2017-06-19T10:55:44.028Z'}})
+
+//grater than Query 
+db.getCollection('specialities').find({created_on :{$gte : '2017-04-25'}})
