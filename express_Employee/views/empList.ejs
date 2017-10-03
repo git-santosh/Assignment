@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+        <% include layouts/main %>
+    </head>
+    <body>
+        <div class="container" style="margin-top:10%;">
+              <% if(empList.length < 0) { %>
+                        <h1>Employee not present in Database</h1>
+                    <% } %>
+	        <div class="table-responsive">
+		        <table class="table" border="1">
+                    <tr>
+                        <th>ID </th>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>PHONE</th>
+                        <th>E-mail</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <% empList.forEach(function(emp){ %>
+                        <tr>
+                            <td> <%= emp._id %> </td>
+                            <td> <%= emp.name.firstName %> &nbsp;<%=emp.name.lastName %></td>
+                            <td> <%= emp.dob %> </td>
+                            <td> <%= emp.phone %> </td>
+                            <td> <%= emp.email %> </td>
+                            <td> <a href="/users/edit/<%= emp._id %>" class="btn btn-md btn-info">edit</a></td>
+                            <td> <a href="/users/delete/<%= emp._id %>" class="btn btn-md btn-danger">delete</a></td>
+                        </tr>
+                    <% }) %>
+		        </table>    
+	        </div>
+        </div>
+    </body>
+</html>

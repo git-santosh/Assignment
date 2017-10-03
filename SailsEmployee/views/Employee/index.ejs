@@ -1,0 +1,35 @@
+
+<div class="container" style="margin-top:2%;">
+	<div class="table-responsive">
+		  <table class="table">
+		    <tr>
+		    <th>ID </th>
+		    <th>Name </th>
+		    <th>address </th>
+		    <th>E-mail </th>
+		    <th>DOB </th>
+		    <th>phone</th>
+		    <th> photo</th>
+		    <th> </th>
+		    <th> </th>
+		    <th> </th>
+		    </tr>
+
+		    <% _.each(users,function(user){ %>
+		    	<tr data-id="<%= user.id %>" data-model="user">
+		    		<td> <%= user.id %> </td>
+		    		<td> <%= user.name %> </td>
+		    		<td> <%= user.address %> </td>
+		    		<td> <%= user.email %> </td>
+		    		<td> <%= user.dob %> </td>
+		    		<td> <%= user.phone %> </td>
+		    		<td> <img src="<%= user.userPhoto %>"> </td>
+		    		<td> <a class="btn btn-sm btn-primary" href="/Employee/show/<%= user.id %>">Show</a></td>
+		    		<td><a class="btn btn-sm btn-warning" href="/Employee/edit/<%= user.id %>">Edit</a> </td>
+		    		<td><a class="btn btn-sm btn-danger" href="/Employee/destroy/<%= user.id %>">Delete</a> </td>
+		    	</tr>
+		    <% }) %>
+		  </table>
+	</div>
+	<a href="/Employee/add">Add Employee</a>
+</div>

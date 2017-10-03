@@ -1,0 +1,128 @@
+//Insert record into MongoDB
+db.getCollection('users').insert({"name":"pravin kumar" , "stauts":"single" , "created_by":"santosh suryawanshi", "created_on":"2017-06-21T09:10:39.850Z"})
+//Find All recoreds 
+//find({where clause},{select clause})
+Users.find({},{},function(error,speciality)
+	{
+		console.log(JSON.stringify(speciality));		
+		if (error)
+		{
+			deferred.resolve(error);
+		}
+		else
+		{
+			deferred.resolve({
+							   "response_status":"success",
+							    "speciality":speciality
+							});
+		}
+	});
+  
+  //Find All recoreds without id. You can remove the _id field from the results by setting its exclusion <field> to 0 in the projection, as in the following example:
+  
+ 	Users.find({},{ name:1 , _id: 0},function(error,speciality)
+	{
+		console.log(JSON.stringify(speciality));		
+		if (error)
+		{
+			deferred.resolve(error);
+		}
+		else
+		{
+			deferred.resolve({
+							   "response_status":"success",
+							    "speciality":speciality
+							});
+		}
+	});
+
+//Update Query [ db.getCollection('DbName').update('existing database field',$set:{ newly added field and value}}) ]
+
+db.getCollection('Users').update({name:'santosh'},{$set :{created_on : '2017-06-19T10:55:44.028Z'}})
+
+//grater than Query 
+db.getCollection('specialities').find({created_on :{$gte : '2017-04-25'}})
+
+
+
+
+/*************** Input Values to function  **********/
+
+{
+        "service_name":"view_procedure",
+        "procedure_name":"Abdominal lapartony",
+        "speciality_id":"5751131e3a1253845560a980",
+        "procedure_status":"published",
+        "published_from":"2014-05-25 00:25:25",
+        "published_to":"2017-07-25 00:25:25",
+        "offset":"All"
+}
+/*************** Function to get procedure list  **********/
+
+apiFunctions['view_procedure'] = function(api_request){
+	var deferred = Q.defer();
+	var limit = 10;
+	var speciality_id = api_request.speciality_id == undefined? "" : api_request.speciality_id;
+	var procedure_name = api_request.procedure_name == undefined? "" : api_request.procedure_name;
+	var procedure_status = api_request.procedure_status == undefined? "" : api_request.procedure_status;
+	var published_from = api_request.published_from == undefined? "" :api_request.published_from;
+	var published_to =api_request.published_to == undefined? "": api_request.published_to;
+	var profile_user_id =api_request.profile_user_id;
+	var offset =api_request.offset == undefined? 0:api_request.offset;
+	
+	if(offset == 'All'){
+		offset = 0;
+		limit = 0;
+	}
+	else{
+		offset = parseInt(offset);
+	}
+	var skip = parseInt(offset * limit );
+	var search_speciality = {};
+	var search_criteria={};
+
+	if(speciality_id != ""){
+		//search_speciality.name = speciality_name;
+		  search_speciality.id = speciality_id;
+	}
+	if(speciality_id!="")
+	{
+		search_criteria.speciality={$elemMatch:search_speciality};
+	}
+	if(procedure_name!=""){
+		search_criteria.procedure_name = procedure_name;
+	}
+	if(procedure_status!="")
+	{
+		search_criteria.procedure_status=procedure_status;
+	}
+	if(published_from!="" && published_to!="")
+	{
+		search_criteria.created_on={"$gte":published_from,"$lte":published_to};
+	}
+	Procedure.find(search_criteria,{},function(err,procedureList){
+			if(err) deferred.resolve(errors.senderror(16));
+		if(!procedureList){
+			deferred.resolve(errors.senderror(20,'procedureList'));
+		}else{
+			var procedureObj = [];
+			procedureList.forEach(function(element , index){
+				var convertToJson = JSON.stringify(element).replace('_id','procedure_Id');
+				var convertToObj = JSON.parse(convertToJson);		
+				procedureObj.push(convertToObj);
+			});
+			var next_offset = "";
+			if(api_request.offset != 'All')
+				 next_offset = parseInt(offset) + 1;
+			else 
+				 next_offset = "";
+
+			deferred.resolve({
+								"response_status":"success",
+								"next_offset":next_offset.toString(),
+								"procedure_list":procedureObj
+			});
+		}
+	}).limit(limit).skip(skip);
+	return deferred.promise;
+}

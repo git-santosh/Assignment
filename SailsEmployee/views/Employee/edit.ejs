@@ -1,0 +1,13 @@
+<div class="container">
+	<form action="/Employee/update/<%= user.id %>" method="post" id="updateUser">
+		<h2> Edit Employee's information </h2>
+		<input type="text" class="form-control" name="name" value="<%= user.name %>" style="margin-bottom:10px;"/>
+		<input type="text" class="form-control" name="address" value="<%= user.address %>" style="margin-bottom:10px;"/>
+		<input type="text" class="form-control" name="email" value="<%= user.email %>" style="margin-bottom:10px;"/>
+		<input type="text" class="form-control" name="phone" value="<%= user.phone %>" style="margin-bottom:10px;">
+		<input type="text" class="form-control" name="dob" value="<%= user.dob %>" style="margin-bottom:10px;">
+		<input type="file" id="userPhotoInput" name="userPhoto" id ="userPhoto" />
+		<input type="submit" class="btn btn-lg btn-primary btn-block" name="Proceed" value="Proceed" >
+	</form>
+
+</div>
