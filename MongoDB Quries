@@ -126,3 +126,31 @@ apiFunctions['view_procedure'] = function(api_request){
 	}).limit(limit).skip(skip);
 	return deferred.promise;
 }
+___________________________________________________________________________________________________________
+To Count How many documnt's are there in Collection 
+
+      Model.count().then(function(count){
+           console.log('count the documents '+count);
+       });
+       
+___________________________________________________________________________________________________________
+Group by Query to find count of courses student's enroll for  
+
+db.student.aggregate(
+[
+    {
+        "$match":
+                { 
+                    "studentID":ObjectId("59d4c31f8ffb10436fbb3ac3")
+                }
+    },
+    {
+        "$group":
+                {
+                    _id:'$courses',
+                    count:{
+                            $sum:1    
+                        }
+                    
+                }
+    }
