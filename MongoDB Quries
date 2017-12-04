@@ -154,3 +154,15 @@ db.student.aggregate(
                     
                 }
     }
+    
+___________________________________________________________________________________________________________
+Remove field form document . 
+let unset = {};
+
+unset['$unset']['name'] = "";
+unset['$unset']['gender'] = "";
+
+adminDB.update({},unset,function(err, data){
+
+})
+
