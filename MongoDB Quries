@@ -165,4 +165,41 @@ unset['$unset']['gender'] = "";
 adminDB.update({},unset,function(err, data){
 
 })
+___________________________________________________________________________________________________________
+to get a specific embedded document inside a MongoDB collection?
 
+db.getCollection('users').findOne({},{'_id':0,'contacts':{$elemMatch:{id:ObjectId("5a40cf5ab97f2d6fa4a2d662")}}})
+db.collection.find({ "notes" : { "$elemMatch" : { "title" : "Hello MongoDB"} }});
+db.collection.find({ "notes.title" : "Hello MongoDB"}, { "notes.title" : 1"});
+db.coll.find({ 'notes.title': 'Hello MongoDB' }, {'notes.$': 1});
+db.Notebook.aggregate(
+    {
+        $project: {
+            "notes": {
+                $filter: {
+                    input: "$notes",
+                    as: "note",
+                    cond: { 
+                        $eq: [ "$$note.title", "Hello MongoDB" ]
+                    }
+                }
+            }
+        }
+    }
+)
+You can use $ or $elemMatch. The $ operator and the $elemMatch operator project a subset of elements from an array based on a condition.
+
+The $elemMatch projection operator takes an explicit condition argument. This allows you to project based on a condition not in the query.
+db.collection.find(
+    {
+        // <expression>
+    },
+    {
+        notes: {
+            $elemMatch: {
+                title: 'Hello MongoDB'
+            }
+        },
+        name: 1
+    }
+)
