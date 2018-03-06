@@ -154,7 +154,16 @@ db.student.aggregate(
                     
                 }
     }
-    
+    //totalCredits is filed in collection
+    db.users.aggregate([
+	{'$group':{'_id':'$totalCredits' , 'total':{'$sum':1}}},
+
+	])
+	//output : -
+	{
+	    "_id" : 1,
+	    "total" : 2
+	}
 ___________________________________________________________________________________________________________
 Remove field form document . 
 let unset = {};
